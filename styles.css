@@ -22,7 +22,11 @@
 
 .code {
 	font-family: monospace;
-	font-weight: 900;
+	border-radius: 4px;
+	font-size: 20px;
+	background-color: #3D293D;
+	color: #fff;
+	padding: 0 10px;
 }
 
 .well > p {
