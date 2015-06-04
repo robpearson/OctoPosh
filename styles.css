@@ -25,6 +25,14 @@
 	font-weight: 900;
 }
 
+.well > p {
+	color: #999999;
+}
+
+.well > p a {
+	color: #6E9FCA;
+}
+
 #documentation h4 {
 	display: inline;
 }
