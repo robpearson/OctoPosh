@@ -50,3 +50,11 @@ table#releases > tbody > tr:first-of-type {
 	font-size: 15px;
 }
 
+footer {
+	bottom: 0;
+	position: fixed;
+	background-color: #f5f5f5;
+	border-top: 1px solid #e3e3e3;
+	width: 100%;
+	color: #999999;
+}
