@@ -34,15 +34,18 @@
 					</div>
 					<div class="col-md-6 col-xs-12">
 						<h2>Installation</h2>
+						<h3>From PowershellGallery</h3>
 						<div class="well well-sm">
 							<ol>
 								<li>
 									<button type="button" class="btn btn-xs btn-primary pull-right hidden-xs hidden-sm" id="copy-button" data-clipboard-text="" data-clipboard-target="code" title="Click to copy me.">
 										<span class="glyphicon glyphicon-copy" id="copy-icon"></span>
 									</button>
-									<span class="code">C:\> <span id="code">Install-Module -Name Octoposh</span></span><br>
+									<span class="code">C:\> <span id="code">Install-Module -Name Octoposh -force</span></span><br>
 								</li>
-								<li>Close your Powershell session and open a new one</li>
+								<li>
+									<span class="code">C:\> Import-Module Octoposh</span><br>
+								</li>
 							</ol>
 							<p class="text-center small">The Install-Module cmdlet is part of the <strong><a target="_blank" href="http://go.microsoft.com/fwlink/?LinkId=398175">Windows Management Framework 5.0 Preview</a>.</strong></p>
 						</div>
