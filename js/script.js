@@ -24,7 +24,6 @@ function createReleasesJSON(releasesResponse) {
 	releasesResponse.forEach(function each(item) {
 		releasesJSON.push({
 			name: item.name,
-			url: item.html_url,
 			date: formatDate(item.published_at),
 			rlsNotes: item.body
 		});
