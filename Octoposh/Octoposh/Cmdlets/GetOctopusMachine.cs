@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Management.Automation;
 using Octoposh.Model;
+using Octopus.Client;
 using Octopus.Client.Model;
 
 namespace Octoposh.Cmdlets
@@ -22,6 +23,16 @@ namespace Octoposh.Cmdlets
         public List<string> EnvironmentName { get; set; }
 
         private OctopusConnection _connection;
+        private OctopusRepository _connectionRepository;
+
+        public GetOctopusMachine()
+        {
+        }
+
+        public GetOctopusMachine(IOctopusRepository connectionRepository)
+        {
+            _connectionRepository = connectionRepository;
+        }
 
         protected override void BeginProcessing()
         {
@@ -32,29 +43,46 @@ namespace Octoposh.Cmdlets
         {
             var list = new List<MachineResource>();
 
+            var connectionRepository = GetRepository();
+
             if (this.ParameterSetName == All)
             {
-                list = _connection.Repository.Machines.FindAll();
+                list = connectionRepository.Machines.FindAll();
             }
             else if (this.ParameterSetName == ByName)
             {
                //list = _connection.Repository.Machines.FindByNames(MachineName);
                foreach (string Name in MachineName)
                {
-                   list.AddRange(_connection.Repository.Machines.FindMany(x => x.Name.Contains(Name)));
+                   list.AddRange(connectionRepository.Machines.FindMany(x => x.Name.Contains(Name)));
                }
             }
             else if (this.ParameterSetName == ByEnvironment)
             {
                 foreach (string name in EnvironmentName)
                 {
-                    var environment = _connection.Repository.Environments.FindByName(name);
-                    list.AddRange(_connection.Repository.Environments.GetMachines(environment));
+                    var environment = connectionRepository.Environments.FindByName(name);
+                    list.AddRange(connectionRepository.Environments.GetMachines(environment));
                 }
             }
 
             WriteObject(list);
             
+        }
+
+        private OctopusRepository GetRepository()
+        {
+            OctopusRepository repo;
+
+            if (_connectionRepository != null)
+            {
+                repo = _connectionRepository;
+            }
+            else
+            {
+                repo = _connection.Repository;
+            }
+            return repo;
         }
     }
 }
